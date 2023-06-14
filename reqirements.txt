@@ -1,0 +1,10 @@
+ttkthemes
+tkinter
+PIL
+numpy
+glob
+skimage
+matplotlib
+tensorflow
+tensorflow_addons
+imutils

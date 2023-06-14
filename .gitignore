@@ -1,0 +1,8 @@
+/data/masks_human/*
+/data/img/*
+/data/masks/*
+/model/Unet/*
+/weights/*
+/template/*
+/data/best_img/*
+/data/test_img/*

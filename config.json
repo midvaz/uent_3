@@ -1,0 +1,26 @@
+{
+    "default":{
+        "classes": 4,
+        "epoch": 25,
+        "count_aug": 60,
+        "colors" : ["red", "lime",
+                  "blue", "black"],
+        "rgb_colors": [
+            [255, 0, 0], 
+            [0, 255, 0], 
+            [0, 0, 255], 
+            [255, 255, 255]],
+        "sample_size": [512, 512],
+        "output_size": [512, 512]    
+    },
+    
+    
+    "path":{
+        "img": "./img/*.JPG",
+        "masks": "./masks/*.png",
+        "test_img": "./test_img/img/*.jpg",
+        "predict_path" : "./test_img/predict/"
+    }
+     
+}
+
