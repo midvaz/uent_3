@@ -9,16 +9,7 @@ from tkinter import filedialog
 
 
 from network_unet import image_processing
-# from network_unet import train
-
-# TODO: ДОБАВИТЬ ВОЗМОЖНОСТЬ ДООБУЧАТЬ СЕТЬ. 
-# НУЖНО УКАЗАТЬ ПУТЬ К ФАЙЛАМ, ВЫБРАТЬ МОДЕЛЬ, 
-# УКАЗАТЬ НАЗВАНИЕ НОВОГО КЛАССА, 
-# ПРИПЛЮСОВАТЬ КОЛИЧЕСТВО К ПЕРЕМЕННОЙ С КЛАССОМ 
-# ДОБАВИТЬ НАЗВАНИЕ НОВОГО КЛАССА. 
-
-# TODO: ДОБАВИТЬ НОРМАЛЬНОЕ ПОЛЕ С ВЫВОДОМ РЕЗУЛЬТАТА
-
+from network_unet import train
 
 
 class Interfase:
@@ -51,17 +42,10 @@ class Interfase:
         self.canvas.delete("all")
         self.filepath = self.label_file.cget("text")
         img = ImageTk.PhotoImage(Image.open(f"{self.filepath}").resize((600,600), Image.ANTIALIAS))
-        # img = img
         self.canvas.create_image(400, 100, image=img)
-        # self.canvas.create_image(512, 512, image=img)
+        self.canvas.create_image(512, 512, image=img)
         self.canvas.image = img
 
-        # analis = self.__get_analisized()
-        analis = """
-Площадь поля = 11340 м2 
-Площадь проблемных зон = 1856 м2
-Процент проблемных зон на поле = 16.36%
-        """
         self.label_file = Label(self.tk, text=analis, width=60)
         self.label_file.grid(row= 5, column=2, padx=10, pady =10)
 
@@ -74,7 +58,6 @@ class Interfase:
             self.tk.destroy()
 
 
-# TODO: что-то делать с переменной
     def __select(self)->dict:
         """
         Метод который обрабатывает то, что выполняет функция
@@ -97,22 +80,20 @@ class Interfase:
         """
         Функция по получению анлиза файла
         """
-        # arial_list = image_processing.img_analysis(img_path=self.filepath)
+        arial_list = image_processing.img_analysis(img_path=self.filepath)
         text = ""
-        # if arial_list[0] > 0:
-        #     text += f"Площадь поля={arial_list[0]} м2\n"
-        # if arial_list[1] > 0:
-        #     text += f"Площадь ям={arial_list[1]} м2\n"
-        # if arial_list[2] > 0:
-        #     text += f"Площадь леса={arial_list[2]} м2\n"
-        # if arial_list[3] > 0:
-        #     text += f"Площадь поля={arial_list[3]} м2"
+        if arial_list[0] > 0:
+            text += f"Площадь поля={arial_list[0]} м2\n"
+        if arial_list[1] > 0:
+            text += f"Площадь ям={arial_list[1]} м2\n"
+        if arial_list[2] > 0:
+            text += f"Площадь леса={arial_list[2]} м2\n"
+        if arial_list[3] > 0:
+            text += f"Площадь поля={arial_list[3]} м2"
         
-        # if (arial_list[1] > 0) and (arial_list[0] > 0):
-        #     text += f"Процент проблемных зон на поле равен:\n{image_processing.get_percent(arial_list[1], 92160)}%"
-        # text = f"Площадь дорог={arial_list[0]}\nПлощадь ям={arial_list[1]}\nПлощадь леса={arial_list[2]}\nПлощадь поля={arial_list[3]}"
-        test = f"Площадь поля = {11340} м2 \nПлощадь ям = {2856} м2\nПроцент проблемных зон на поле равен:{round(2856/11340*100, 2)}%"
-        print(test)
+        if (arial_list[1] > 0) and (arial_list[0] > 0):
+            text += f"Процент проблемных зон на поле равен:\n{image_processing.get_percent(arial_list[1], 92160)}%"
+
         return text
         
 
@@ -167,9 +148,6 @@ class Interfase:
         """
         Добавления нового класса
         """
-        # self.window = Toplevel()
-        # self.window.title("Добавление нового класса")
-        # self.window.geometry("400x400")
         self.__new_window()
 
         self.new_class_name = ""
@@ -225,8 +203,6 @@ class Interfase:
 
         self.window.grab_set()
 
-        # cnn = train.Unet(path_img=)
-
 
     def rendering(self)->None:
         """
@@ -252,22 +228,6 @@ class Interfase:
 
         self.btn_show = Button(self.tk, text="Показать", command=self.__show_image)
         self.btn_show.grid(row= 3, column=2, padx=10, pady =10)
-
-        # self.roud = IntVar()
-        # self.roud_checkbutton = ttk.Checkbutton(text="roud", variable=self.roud)
-        # self.roud_checkbutton.grid(row= 1, column=1, padx=10, pady =10)
-
-        # self.forest = IntVar()
-        # self.forest_checkbutton = ttk.Checkbutton(text="forest", variable=self.forest)
-        # self.forest_checkbutton.grid(row= 2, column=1, padx=10, pady =10)
-
-        # self.field = IntVar()
-        # self.field_checkbutton = ttk.Checkbutton(text="field", variable=self.field)
-        # self.field_checkbutton.grid(row= 3, column=1, padx=10, pady =10)
-
-        # self.hole = IntVar()
-        # self.hole_checkbutton = ttk.Checkbutton(text="hole", variable=self.hole)
-        # self.hole_checkbutton.grid(row= 4, column=1, padx=10, pady =10)
 
         self.canvas = Canvas(self.tk, width=600, height=600, bd=0, highlightthickness=0)
         self.canvas.grid(row= 5, column=1, padx=10, pady =10)

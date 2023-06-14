@@ -1,10 +1,10 @@
-# from tensorflow import keras
+
 import os
 import keras
 from keras import Model
 import numpy as np
 
-# import train
+import train
 
 from skimage import measure
 from skimage.io import imread, imsave, imshow
@@ -77,49 +77,14 @@ def rendering_imag(
 def img_analysis (
         rgb_colors:list = [],
         
-        img_path:str = 'C:\\Users\\mi28d\\YandexDisk\\study\\diplom\\python\\v3\\Unet_dip\data\\best_img\\l12.png',
+        img_path:str = '.\\data\\img\\*.png',
         visualizal_img:bool = False,
         img = None
     ) -> list:
-    # img_path:str = 'C:\\Users\\mi28d\\YandexDisk\\study\\diplom\\python\\v3\\Unet_dip\\data\\donut.jpg',
-    # img_path:str = "../data/best_img/i2.JPG",
-    # img_path:str = 'C:\\Users\\mi28d\\YandexDisk\\study\\diplom\\python\\v3\\Unet_dip\data\\best_img\\i3.JPG'
 
     """
     Функция для анализа изображения
     """
-    # img_path = cv2.imread("C:\\Users\\mi28d\\Desktop\\la.JPG")
-    # img_path = "C:\\Users\\mi28d\\YandexDisk\\study\\diplom\\python\\v3\\Unet_dip\data\\best_img\\l12.png"
-    
-    # зеленный дорога
-    # hsv_min = np.array((0, 0, 199), np.uint8)
-    # hsv_max = np.array((255, 255, 255), np.uint8)
-
-    # # красный дырка
-    # hsv_min = np.array((146, 158, 0), np.uint8)
-    # hsv_max = np.array((255, 255, 255), np.uint8)
-
-    # синий деревья
-    # hsv_min = np.array((99, 199, 130), np.uint8)
-    # hsv_max = np.array((255, 255, 255), np.uint8)
-
-    # желтый 
-    # hsv_min = np.array((23, 255, 121), np.uint8)
-    # hsv_max = np.array((38, 255, 255), np.uint8)
-
-    # hsv_min = np.array( [
-    #     np.array((0, 0, 199), np.uint8),
-    #     np.array((146, 158, 0), np.uint8),
-    #     np.array((99, 199, 130), np.uint8),
-    #     np.array((23, 255, 121), np.uint8)
-    # ])
-
-    # hsv_min = np.array( [
-    #     np.array((255, 255, 255), np.uint8),
-    #     np.array((255, 255, 255), np.uint8),
-    #     np.array((255, 255, 255), np.uint8),
-    #     np.array((38, 255, 255), np.uint8)
-    # ])
 
     name = [
         "дорога",
@@ -142,8 +107,6 @@ def img_analysis (
         np.array((38, 255, 255), np.uint8)
     ]
 
-    # for i in range(len(hsv_min)):
-    #     print(hsv_min[i])
 
     arial_list = []
 
@@ -178,19 +141,7 @@ def img_analysis (
             print(f"площадь равна = {s}")
     print (arial_list)
     return arial_list
-    # if visualizal_img:
-    #         __visualization_S_img(img, contours, hierarchy)
 
-    # if img is None:
-    #     img = cv.imread(f"{img_path}")
-    #     print ("Загружаю изображение")
-    # hsv = cv.cvtColor(img, cv.COLOR_BGR2HSV )
-    # thresh = cv.inRange(hsv, hsv_min, hsv_max )
-    # contours, hierarchy = cv.findContours(thresh.copy(), cv.RETR_EXTERNAL, cv.CHAIN_APPROX_NONE)
-    
-    # count_picksels = cv2.contourArea(contours[0])
-    # s = __convert_pixel_to_metre(count_picksels)
-    # print(s)
 
 
 def get_percent(a:float, b:float) -> float:
@@ -229,9 +180,6 @@ def __convert_pixel_to_metre(
     else:
         print(f"{metre**2/size_img**2=}      {count_picksels=}")
         return (metre**2/size_img**2) * count_picksels
-
-# TODO: ДОПИСАТЬ МЕТОД ПРОЦЕНТА
-
 
 
 if __name__ == '__main__':
